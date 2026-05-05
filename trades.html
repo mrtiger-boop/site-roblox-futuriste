@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Trades - RbxTrade Nexus</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Trades</title>
+
+<link rel="icon" href="logotn.png">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-  <h1>💱 Trades Nexus</h1>
+  <div class="site-logo">
+    <img src="logotn.png">
+    <h1>Trades</h1>
+  </div>
+
   <nav>
     <a href="index.html">Accueil</a>
     <a href="trades.html">Trades</a>
     <a href="discussion.html">Discussion</a>
-    <a href="securite.html">Sécurité</a>
-    <a href="connexion.html">🔐 Connexion</a>
+    <a href="connexion.html">Connexion</a>
   </nav>
+
   <span id="userPseudo"></span>
 </header>
 
-<section class="page-hero">
-  <span class="badge">🌐 Tous les jeux Roblox</span>
-  <h2>Centre des échanges</h2>
-  <p>Publie ton offre et trouve des joueurs pour trade.</p>
-</section>
-
 <section class="trade-layout">
-  <div class="glass-panel">
-    <h2>🚀 Créer une offre</h2>
 
-    <input id="jeu" placeholder="Nom du jeu Roblox">
-    <input id="donne" placeholder="Je donne...">
-    <input id="cherche" placeholder="Je cherche...">
+<div class="glass-panel">
+  <h2>Créer un trade</h2>
 
-    <select id="rarete">
-      <option>Commun</option>
-      <option>Rare</option>
-      <option>Épique</option>
-      <option>Légendaire</option>
-      <option>Mythique</option>
-    </select>
+  <input id="jeu" placeholder="Jeu Roblox">
+  <input id="donne" placeholder="Je donne">
+  <input id="cherche" placeholder="Je cherche">
 
-    <button onclick="ajouterTrade()">Publier le trade</button>
-  </div>
+  <select id="rarete">
+    <option>Commun</option>
+    <option>Rare</option>
+    <option>Épique</option>
+    <option>Légendaire</option>
+  </select>
 
-  <div class="glass-panel">
-    <h2>🔎 Offres disponibles</h2>
-    <div id="listeTrades" class="trade-list"></div>
-  </div>
+  <button onclick="ajouterTrade()">Publier</button>
+</div>
+
+<div class="glass-panel">
+  <h2>Trades</h2>
+  <div id="listeTrades"></div>
+</div>
+
 </section>
 
 <script type="module" src="script.js"></script>
