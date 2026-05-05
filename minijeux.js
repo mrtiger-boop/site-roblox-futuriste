@@ -1,30 +1,20 @@
 let secretNumber = Math.floor(Math.random() * 10) + 1;
 let reflexReady = false;
 let reflexStart = 0;
+let alienScore = 0;
 
 function rollDice() {
-  const result = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("diceResult").innerText =
-    result === 6 ? "🎲 6 PARFAIT !" : "🎲 " + result;
+  const r = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("diceResult").innerText = r === 6 ? "🎲 6 PARFAIT !" : "🎲 " + r;
 }
 
 function coinFlip() {
-  const result = Math.random() < 0.5 ? "Pile" : "Face";
-  document.getElementById("coinResult").innerText = "🪙 " + result;
+  document.getElementById("coinResult").innerText = Math.random() < 0.5 ? "🪙 Pile" : "🪙 Face";
 }
 
 function roulette() {
-  const rewards = [
-    "⭐ Bonus",
-    "🌌 Nexus Power",
-    "💎 Ultra rare",
-    "🔥 Hot Trade",
-    "⚡ Boost",
-    "❌ Perdu"
-  ];
-
-  let result = rewards[Math.floor(Math.random() * rewards.length)];
-  document.getElementById("rouletteResult").innerText = result;
+  const rewards = ["⭐ Bonus", "🌌 Nexus Power", "💎 Ultra rare", "🔥 Hot Trade", "⚡ Boost", "❌ Perdu"];
+  document.getElementById("rouletteResult").innerText = rewards[Math.floor(Math.random() * rewards.length)];
 }
 
 function startReflex() {
@@ -40,11 +30,9 @@ function startReflex() {
     return;
   }
 
-  result.innerText = "Attends le vert...";
+  result.innerText = "Attends...";
   btn.innerText = "Patiente...";
   btn.classList.remove("ready-reflex");
-
-  const delay = Math.floor(Math.random() * 3000) + 1500;
 
   setTimeout(() => {
     reflexReady = true;
@@ -52,23 +40,17 @@ function startReflex() {
     btn.innerText = "CLIQUE !";
     btn.classList.add("ready-reflex");
     result.innerText = "GO !";
-  }, delay);
+  }, Math.floor(Math.random() * 3000) + 1500);
 }
 
 function guessNumber() {
-  const input = document.getElementById("guessInput");
+  const value = Number(document.getElementById("guessInput").value);
   const result = document.getElementById("guessResult");
-  const value = Number(input.value);
 
-  if (!value) {
-    result.innerText = "Entre un nombre";
-    return;
-  }
-
+  if (!value) return result.innerText = "Entre un nombre";
   if (value === secretNumber) {
     result.innerText = "✅ Trouvé !";
     secretNumber = Math.floor(Math.random() * 10) + 1;
-    input.value = "";
   } else if (value < secretNumber) {
     result.innerText = "⬆️ Plus haut";
   } else {
@@ -77,24 +59,88 @@ function guessNumber() {
 }
 
 function openCrystal() {
-  const rarities = [
-    "⚪ Commun",
-    "🔵 Rare",
-    "🟣 Épique",
-    "🟡 Légendaire",
-    "🌈 Mythique",
-    "👑 Nexus Divin"
-  ];
-
-  const chances = Math.random();
-  let result;
-
-  if (chances < 0.45) result = rarities[0];
-  else if (chances < 0.70) result = rarities[1];
-  else if (chances < 0.87) result = rarities[2];
-  else if (chances < 0.96) result = rarities[3];
-  else if (chances < 0.995) result = rarities[4];
-  else result = rarities[5];
-
+  const chance = Math.random();
+  let result = "⚪ Commun";
+  if (chance > 0.55) result = "🔵 Rare";
+  if (chance > 0.75) result = "🟣 Épique";
+  if (chance > 0.9) result = "🟡 Légendaire";
+  if (chance > 0.98) result = "🌈 Mythique";
+  if (chance > 0.997) result = "👑 Nexus Divin";
   document.getElementById("crystalResult").innerText = result;
+}
+
+function cosmicTarget() {
+  const score = Math.floor(Math.random() * 101);
+  document.getElementById("targetResult").innerText = score > 90 ? "🎯 Centre parfait !" : "🎯 " + score + "%";
+}
+
+function memoryCode() {
+  const code = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById("memoryResult").innerText = "🧠 Code : " + code;
+}
+
+function planetLuck() {
+  const planets = ["🪐 Saturne rare", "🌍 Terre", "🔴 Mars", "🟣 Planète Nexus", "🌌 Monde secret"];
+  document.getElementById("planetResult").innerText = planets[Math.floor(Math.random() * planets.length)];
+}
+
+function bombGame() {
+  const safe = Math.random() > 0.35;
+  document.getElementById("bombResult").innerText = safe ? "✅ Désamorcée !" : "💥 Boom !";
+}
+
+function mysteryWord() {
+  const words = ["Robux", "Trade", "Galaxy", "Nexus", "Avatar", "Legendary", "Obby"];
+  document.getElementById("wordResult").innerText = "🧩 " + words[Math.floor(Math.random() * words.length)];
+}
+
+function rocketBoost() {
+  const height = Math.floor(Math.random() * 10000);
+  document.getElementById("rocketResult").innerText = "🚀 " + height + " km";
+}
+
+function blackHole() {
+  const survived = Math.random() > 0.45;
+  document.getElementById("blackHoleResult").innerText = survived ? "🛡️ Survécu !" : "🕳️ Aspiré...";
+}
+
+function galaxyChest() {
+  const loot = ["🪙 Pièces cosmiques", "💎 Gemme", "⚡ Boost", "🎁 Coffre vide", "👑 Couronne Nexus"];
+  document.getElementById("chestResult").innerText = loot[Math.floor(Math.random() * loot.length)];
+}
+
+function randomPotion() {
+  const effects = ["🧪 Invisibilité", "🔥 Force", "⚡ Vitesse", "🌀 Téléportation", "😵 Potion ratée"];
+  document.getElementById("potionResult").innerText = effects[Math.floor(Math.random() * effects.length)];
+}
+
+function alienClicker() {
+  alienScore++;
+  document.getElementById("alienResult").innerText = "👾 " + alienScore;
+}
+
+function satelliteScan() {
+  const scans = ["🛰️ Signal faible", "📡 Joueur détecté", "🌌 Zone rare", "💎 Objet repéré", "❌ Rien trouvé"];
+  document.getElementById("scanResult").innerText = scans[Math.floor(Math.random() * scans.length)];
+}
+
+function oracleNexus() {
+  const predictions = [
+    "🔮 Un bon trade arrive",
+    "🌌 La chance te suit",
+    "⚠️ Attention aux arnaques",
+    "💎 Offre rare bientôt",
+    "🔥 Ton profil va monter"
+  ];
+  document.getElementById("oracleResult").innerText = predictions[Math.floor(Math.random() * predictions.length)];
+}
+
+function bossChance() {
+  const dmg = Math.floor(Math.random() * 101);
+  document.getElementById("bossResult").innerText = dmg > 85 ? "🐉 Boss vaincu !" : "⚔️ " + dmg + " dégâts";
+}
+
+function shootingStar() {
+  const wishes = ["🌠 Vœu accepté", "⭐ Chance +", "💫 Presque...", "🌌 Nexus t’écoute", "❌ Étoile ratée"];
+  document.getElementById("starResult").innerText = wishes[Math.floor(Math.random() * wishes.length)];
 }
