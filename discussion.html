@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Discussion - RbxTrade Nexus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>💬 Discussion Nexus</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="trades.html">Trades</a>
+    <a href="discussion.html">Discussion</a>
+    <a href="securite.html">Sécurité</a>
+    <a href="connexion.html">🔐 Connexion</a>
+  </nav>
+  <span id="userPseudo"></span>
+</header>
+
+<section class="page-hero">
+  <span class="badge">💬 Chat communautaire</span>
+  <h2>Salon de discussion</h2>
+  <p>Parle avec les joueurs et organise tes échanges.</p>
+</section>
+
+<section class="chat-layout">
+  <div class="glass-panel chat-box">
+    <div class="chat-header">
+      <h2>🌌 Chat global</h2>
+      <span>Messages sauvegardés avec Firebase</span>
+    </div>
+
+    <div id="messages" class="messages-zone"></div>
+
+    <div class="chat-inputs">
+      <input id="messageChat" placeholder="Écris ton message...">
+      <button onclick="envoyerMessage()">Envoyer</button>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

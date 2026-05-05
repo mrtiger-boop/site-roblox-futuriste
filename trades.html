@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Trades - RbxTrade Nexus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>💱 Trades Nexus</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="trades.html">Trades</a>
+    <a href="discussion.html">Discussion</a>
+    <a href="securite.html">Sécurité</a>
+    <a href="connexion.html">🔐 Connexion</a>
+  </nav>
+  <span id="userPseudo"></span>
+</header>
+
+<section class="page-hero">
+  <span class="badge">🌐 Tous les jeux Roblox</span>
+  <h2>Centre des échanges</h2>
+  <p>Publie ton offre et trouve des joueurs pour trade.</p>
+</section>
+
+<section class="trade-layout">
+  <div class="glass-panel">
+    <h2>🚀 Créer une offre</h2>
+
+    <input id="jeu" placeholder="Nom du jeu Roblox">
+    <input id="donne" placeholder="Je donne...">
+    <input id="cherche" placeholder="Je cherche...">
+
+    <select id="rarete">
+      <option>Commun</option>
+      <option>Rare</option>
+      <option>Épique</option>
+      <option>Légendaire</option>
+      <option>Mythique</option>
+    </select>
+
+    <button onclick="ajouterTrade()">Publier le trade</button>
+  </div>
+
+  <div class="glass-panel">
+    <h2>🔎 Offres disponibles</h2>
+    <div id="listeTrades" class="trade-list"></div>
+  </div>
+</section>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

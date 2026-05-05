@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion - RbxTrade Nexus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🔐 Connexion</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="trades.html">Trades</a>
+    <a href="discussion.html">Discussion</a>
+    <a href="securite.html">Sécurité</a>
+  </nav>
+</header>
+
+<section class="login-layout">
+  <div class="glass-panel">
+    <h2>Créer un compte</h2>
+    <input id="pseudoRegister" placeholder="Pseudo Roblox">
+    <input id="passwordRegister" type="password" placeholder="Mot de passe du site">
+    <button onclick="register()">S'inscrire</button>
+  </div>
+
+  <div class="glass-panel">
+    <h2>Se connecter</h2>
+    <input id="pseudoLogin" placeholder="Pseudo Roblox">
+    <input id="passwordLogin" type="password" placeholder="Mot de passe du site">
+    <button onclick="login()">Connexion</button>
+  </div>
+</section>
+
+<script type="module" src="auth.js"></script>
+</body>
+</html>
