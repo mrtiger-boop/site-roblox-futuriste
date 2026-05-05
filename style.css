@@ -149,3 +149,23 @@
 .profile-actions {
   margin-top: 12px;
 }
+
+.reputation-box {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.reputation-box span {
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: rgba(0, 247, 255, 0.12);
+  border: 1px solid rgba(0, 247, 255, 0.45);
+  color: #e0f2fe;
+  font-weight: bold;
+}
+
+.report-btn {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+}
