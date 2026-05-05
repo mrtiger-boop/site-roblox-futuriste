@@ -12,7 +12,7 @@
 <header>
   <div class="site-logo">
     <img src="logotn.png" alt="Logo">
-    <h1>Mini-jeux</h1>
+    <h1>Mini-jeux Nexus</h1>
   </div>
 
   <nav>
@@ -27,34 +27,57 @@
   <span id="userPseudo"></span>
 </header>
 
-<section class="games-page">
-  <h2>🎮 Zone Mini-jeux</h2>
-  <p>Amuse-toi pendant que tu attends des trades.</p>
+<section class="games-hero">
+  <span class="mini-badge">🎮 Zone détente</span>
+  <h2>Mini-jeux Galactiques</h2>
+  <p>Joue pendant que tu attends des trades et tente de battre tes scores.</p>
+</section>
 
-  <div class="games-grid">
+<section class="games-grid">
 
-    <div class="game-card">
-      <h3>🎲 Dé spatial</h3>
-      <p>Lance un dé galactique.</p>
-      <button onclick="rollDice()">Lancer</button>
-      <strong id="diceResult">?</strong>
-    </div>
-
-    <div class="game-card">
-      <h3>🪙 Pile ou face</h3>
-      <p>Choisis ton destin Nexus.</p>
-      <button onclick="coinFlip()">Lancer</button>
-      <strong id="coinResult">?</strong>
-    </div>
-
-    <div class="game-card">
-      <h3>🎰 Roulette Nexus</h3>
-      <p>Tente ta chance.</p>
-      <button onclick="roulette()">Tourner</button>
-      <strong id="rouletteResult">?</strong>
-    </div>
-
+  <div class="game-card big-glow">
+    <h3>🎲 Dé spatial</h3>
+    <p>Lance le dé et tente le 6 parfait.</p>
+    <button onclick="rollDice()">Lancer</button>
+    <strong id="diceResult">?</strong>
   </div>
+
+  <div class="game-card">
+    <h3>🪙 Pile ou face</h3>
+    <p>Choisis ton destin Nexus.</p>
+    <button onclick="coinFlip()">Lancer</button>
+    <strong id="coinResult">?</strong>
+  </div>
+
+  <div class="game-card big-glow">
+    <h3>🎰 Roulette Nexus</h3>
+    <p>La roulette peut te donner une récompense rare.</p>
+    <button onclick="roulette()">Tourner</button>
+    <strong id="rouletteResult">?</strong>
+  </div>
+
+  <div class="game-card">
+    <h3>⚡ Réflexe Flash</h3>
+    <p>Clique quand le bouton devient vert.</p>
+    <button id="reflexBtn" onclick="startReflex()">Démarrer</button>
+    <strong id="reflexResult">Prêt ?</strong>
+  </div>
+
+  <div class="game-card">
+    <h3>🔢 Nombre mystère</h3>
+    <p>Trouve le nombre entre 1 et 10.</p>
+    <input id="guessInput" type="number" min="1" max="10" placeholder="Ton nombre">
+    <button onclick="guessNumber()">Tester</button>
+    <strong id="guessResult">?</strong>
+  </div>
+
+  <div class="game-card big-glow">
+    <h3>🌌 Cristal Nexus</h3>
+    <p>Ouvre un cristal et découvre ta rareté.</p>
+    <button onclick="openCrystal()">Ouvrir</button>
+    <strong id="crystalResult">💎</strong>
+  </div>
+
 </section>
 
 <script type="module" src="script.js"></script>
