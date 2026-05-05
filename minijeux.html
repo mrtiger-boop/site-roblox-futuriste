@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mini-jeux - RbxTrade Nexus</title>
+<link rel="icon" href="logotn.png">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="site-logo">
+    <img src="logotn.png" alt="Logo">
+    <h1>Mini-jeux</h1>
+  </div>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="trades.html">Trades</a>
+    <a href="discussion.html">Discussion</a>
+    <a href="profil.html">Profil</a>
+    <a href="minijeux.html">Mini-jeux</a>
+    <a href="connexion.html">Connexion</a>
+  </nav>
+
+  <span id="userPseudo"></span>
+</header>
+
+<section class="games-page">
+  <h2>🎮 Zone Mini-jeux</h2>
+  <p>Amuse-toi pendant que tu attends des trades.</p>
+
+  <div class="games-grid">
+
+    <div class="game-card">
+      <h3>🎲 Dé spatial</h3>
+      <p>Lance un dé galactique.</p>
+      <button onclick="rollDice()">Lancer</button>
+      <strong id="diceResult">?</strong>
+    </div>
+
+    <div class="game-card">
+      <h3>🪙 Pile ou face</h3>
+      <p>Choisis ton destin Nexus.</p>
+      <button onclick="coinFlip()">Lancer</button>
+      <strong id="coinResult">?</strong>
+    </div>
+
+    <div class="game-card">
+      <h3>🎰 Roulette Nexus</h3>
+      <p>Tente ta chance.</p>
+      <button onclick="roulette()">Tourner</button>
+      <strong id="rouletteResult">?</strong>
+    </div>
+
+  </div>
+</section>
+
+<script type="module" src="script.js"></script>
+<script src="minijeux.js"></script>
+</body>
+</html>
