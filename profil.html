@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Profil</title>
+
+<link rel="icon" href="./logotn.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="site-logo">
+    <img src="./logotn.png">
+    <h1>Profil</h1>
+  </div>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="trades.html">Trades</a>
+    <a href="discussion.html">Discussion</a>
+  </nav>
+
+  <span id="userPseudo"></span>
+</header>
+
+<section class="profile-page">
+
+<div class="profile-card">
+  <img id="profileAvatar" class="profile-avatar">
+  <h2 id="profileName"></h2>
+  <p id="profileBadge"></p>
+
+  <div class="profile-stats">
+    <div>
+      <strong id="tradeCount">0</strong>
+      <span>Trades</span>
+    </div>
+    <div>
+      <strong id="messageCount">0</strong>
+      <span>Messages</span>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<script type="module" src="./script.js"></script>
+</body>
+</html>
