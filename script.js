@@ -21,168 +21,66 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function getPseudo() {
-  return localStorage.getItem("pseudo") || "Invité";
-}
+const getPseudo = () => localStorage.getItem("pseudo") || "Invité";
 
-function formatTime(date) {
-  if (!date) return "";
-  return date.toLocaleTimeString("fr-FR", {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-}
+/* TRADE */
+window.ajouterTrade = async () => {
+  const jeu = document.getElementById("jeu")?.value;
+  const donne = document.getElementById("donne")?.value;
+  const cherche = document.getElementById("cherche")?.value;
 
-window.ajouterTrade = async function () {
-  const pseudo = getPseudo();
-  const jeu = document.getElementById("jeu")?.value.trim();
-  const donne = document.getElementById("donne")?.value.trim();
-  const cherche = document.getElementById("cherche")?.value.trim();
-  const rarete = document.getElementById("rarete")?.value || "Commun";
-
-  if (!jeu || !donne || !cherche) {
-    alert("Remplis tous les champs !");
-    return;
-  }
+  if (!jeu || !donne || !cherche) return alert("Remplis tout");
 
   await addDoc(collection(db, "trades"), {
-    pseudo,
+    pseudo: getPseudo(),
     jeu,
     donne,
     cherche,
-    rarete,
     createdAt: serverTimestamp()
   });
-
-  document.getElementById("jeu").value = "";
-  document.getElementById("donne").value = "";
-  document.getElementById("cherche").value = "";
 };
 
-window.envoyerMessage = async function () {
-  const pseudo = getPseudo();
-  const message = document.getElementById("messageChat")?.value.trim();
+/* CHAT */
+window.envoyerMessage = async () => {
+  const message = document.getElementById("messageChat")?.value;
 
-  if (!message) {
-    alert("Écris un message !");
-    return;
-  }
+  if (!message) return;
 
   await addDoc(collection(db, "messages"), {
-    pseudo,
+    pseudo: getPseudo(),
     message,
     createdAt: serverTimestamp()
   });
-
-  document.getElementById("messageChat").value = "";
 };
 
-const listeTrades = document.getElementById("listeTrades");
-
-if (listeTrades) {
-  const qTrades = query(collection(db, "trades"), orderBy("createdAt", "desc"));
-
-  onSnapshot(qTrades, (snapshot) => {
-    listeTrades.innerHTML = "";
-
-    if (snapshot.empty) {
-      listeTrades.innerHTML = `<p class="empty">Aucun trade pour le moment.</p>`;
-      return;
-    }
-
-    snapshot.forEach((doc) => {
-      const t = doc.data();
-
-      listeTrades.innerHTML += `
-        <div class="trade">
-          <h3>👤 ${t.pseudo}</h3>
-          <p><strong>🎮 Jeu :</strong> ${t.jeu}</p>
-          <p><strong>📦 Donne :</strong> ${t.donne}</p>
-          <p><strong>🔍 Cherche :</strong> ${t.cherche}</p>
-          <span class="rarete">💎 ${t.rarete}</span>
-        </div>
-      `;
-    });
-  });
-}
-
+/* AFFICHAGE */
 const messages = document.getElementById("messages");
-
 if (messages) {
-  const qMessages = query(collection(db, "messages"), orderBy("createdAt", "asc"));
-
-  onSnapshot(qMessages, (snapshot) => {
+  onSnapshot(query(collection(db, "messages"), orderBy("createdAt")), snap => {
     messages.innerHTML = "";
-
-    if (snapshot.empty) {
-      messages.innerHTML = `
-        <div class="chat-message bot">
-          <strong>RbxTrade Nexus</strong>
-          <p>Aucun message pour le moment.</p>
-        </div>
-      `;
-      return;
-    }
-
-    snapshot.forEach((doc) => {
+    snap.forEach(doc => {
       const m = doc.data();
-      const time = m.createdAt?.toDate ? formatTime(m.createdAt.toDate()) : "";
-
-      messages.innerHTML += `
-        <div class="chat-message">
-          <div class="chat-message-top">
-            <strong>${m.pseudo}</strong>
-            <span>${time}</span>
-          </div>
-          <p>${m.message}</p>
-        </div>
-      `;
+      messages.innerHTML += `<div class="chat-message">
+        <strong>${m.pseudo}</strong>
+        <p>${m.message}</p>
+      </div>`;
     });
-
-    messages.scrollTop = messages.scrollHeight;
   });
-}
-
-const userPseudo = document.getElementById("userPseudo");
-if (userPseudo) {
-  userPseudo.innerText = "👤 " + getPseudo();
 }
 
 /* PROFIL */
 const profileName = document.getElementById("profileName");
-const profileAvatar = document.getElementById("profileAvatar");
-const profileBadge = document.getElementById("profileBadge");
-const tradeCount = document.getElementById("tradeCount");
-const messageCount = document.getElementById("messageCount");
-
-if (profileName && profileAvatar && profileBadge) {
+if (profileName) {
   const pseudo = getPseudo();
-
   profileName.innerText = pseudo;
-  profileAvatar.src = `https://robohash.org/${pseudo}.png?set=set4`;
+  document.getElementById("profileAvatar").src =
+    "https://robohash.org/" + pseudo;
 
-  if (pseudo.toLowerCase() === "alan224402") {
-    profileBadge.innerText = "👑 Fondateur";
-    profileBadge.classList.add("founder-badge");
-  } else if (pseudo === "Invité") {
-    profileBadge.innerText = "Invité";
-  } else {
-    profileBadge.innerText = "🌌 Membre Nexus";
+  if (pseudo === "alan224402") {
+    document.getElementById("profileBadge").innerText = "👑 Fondateur";
   }
-
-  onSnapshot(collection(db, "trades"), (snapshot) => {
-    let count = 0;
-    snapshot.forEach((doc) => {
-      if (doc.data().pseudo === pseudo) count++;
-    });
-    tradeCount.innerText = count;
-  });
-
-  onSnapshot(collection(db, "messages"), (snapshot) => {
-    let count = 0;
-    snapshot.forEach((doc) => {
-      if (doc.data().pseudo === pseudo) count++;
-    });
-    messageCount.innerText = count;
-  });
 }
+
+/* HEADER */
+const userPseudo = document.getElementById("userPseudo");
+if (userPseudo) userPseudo.innerText = getPseudo();
