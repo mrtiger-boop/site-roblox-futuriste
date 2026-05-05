@@ -21,66 +21,185 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const getPseudo = () => localStorage.getItem("pseudo") || "Invité";
+function getPseudo() {
+  return localStorage.getItem("pseudo") || "Invité";
+}
 
-/* TRADE */
-window.ajouterTrade = async () => {
-  const jeu = document.getElementById("jeu")?.value;
-  const donne = document.getElementById("donne")?.value;
-  const cherche = document.getElementById("cherche")?.value;
+function formatTime(date) {
+  if (!date) return "";
+  return date.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
 
-  if (!jeu || !donne || !cherche) return alert("Remplis tout");
+/* ======================
+   AFFICHER PSEUDO HEADER
+====================== */
+
+const userPseudo = document.getElementById("userPseudo");
+if (userPseudo) {
+  userPseudo.innerText = "👤 " + getPseudo();
+}
+
+/* ======================
+   TRADES
+====================== */
+
+window.ajouterTrade = async function () {
+  const pseudo = getPseudo();
+  const jeu = document.getElementById("jeu")?.value.trim();
+  const donne = document.getElementById("donne")?.value.trim();
+  const cherche = document.getElementById("cherche")?.value.trim();
+
+  if (!jeu || !donne || !cherche) {
+    alert("Remplis tous les champs !");
+    return;
+  }
 
   await addDoc(collection(db, "trades"), {
-    pseudo: getPseudo(),
+    pseudo,
     jeu,
     donne,
     cherche,
     createdAt: serverTimestamp()
   });
+
+  document.getElementById("jeu").value = "";
+  document.getElementById("donne").value = "";
+  document.getElementById("cherche").value = "";
 };
 
-/* CHAT */
-window.envoyerMessage = async () => {
-  const message = document.getElementById("messageChat")?.value;
+const listeTrades = document.getElementById("listeTrades");
 
-  if (!message) return;
+if (listeTrades) {
+  const qTrades = query(collection(db, "trades"), orderBy("createdAt", "desc"));
 
-  await addDoc(collection(db, "messages"), {
-    pseudo: getPseudo(),
-    message,
-    createdAt: serverTimestamp()
-  });
-};
+  onSnapshot(qTrades, (snapshot) => {
+    listeTrades.innerHTML = "";
 
-/* AFFICHAGE */
-const messages = document.getElementById("messages");
-if (messages) {
-  onSnapshot(query(collection(db, "messages"), orderBy("createdAt")), snap => {
-    messages.innerHTML = "";
-    snap.forEach(doc => {
-      const m = doc.data();
-      messages.innerHTML += `<div class="chat-message">
-        <strong>${m.pseudo}</strong>
-        <p>${m.message}</p>
-      </div>`;
+    if (snapshot.empty) {
+      listeTrades.innerHTML = `<p class="empty">Aucun trade pour le moment.</p>`;
+      return;
+    }
+
+    snapshot.forEach((doc) => {
+      const t = doc.data();
+
+      listeTrades.innerHTML += `
+        <div class="trade">
+          <h3>👤 ${t.pseudo}</h3>
+          <p><strong>🎮 Jeu :</strong> ${t.jeu}</p>
+          <p><strong>📦 Donne :</strong> ${t.donne}</p>
+          <p><strong>🔍 Cherche :</strong> ${t.cherche}</p>
+          <span class="rarete">💱 TRADE</span>
+        </div>
+      `;
     });
   });
 }
 
-/* PROFIL */
-const profileName = document.getElementById("profileName");
-if (profileName) {
-  const pseudo = getPseudo();
-  profileName.innerText = pseudo;
-  document.getElementById("profileAvatar").src =
-    "https://robohash.org/" + pseudo;
+/* ======================
+   CHAT
+====================== */
 
-  if (pseudo === "alan224402") {
-    document.getElementById("profileBadge").innerText = "👑 Fondateur";
+window.envoyerMessage = async function () {
+  const pseudo = getPseudo();
+  const message = document.getElementById("messageChat")?.value.trim();
+
+  if (!message) {
+    alert("Écris un message !");
+    return;
   }
+
+  await addDoc(collection(db, "messages"), {
+    pseudo,
+    message,
+    createdAt: serverTimestamp()
+  });
+
+  document.getElementById("messageChat").value = "";
+};
+
+const messages = document.getElementById("messages");
+
+if (messages) {
+  const qMessages = query(collection(db, "messages"), orderBy("createdAt", "asc"));
+
+  onSnapshot(qMessages, (snapshot) => {
+    messages.innerHTML = "";
+
+    if (snapshot.empty) {
+      messages.innerHTML = `
+        <div class="chat-message">
+          <strong>RbxTrade Nexus</strong>
+          <p>Aucun message pour le moment.</p>
+        </div>
+      `;
+      return;
+    }
+
+    snapshot.forEach((doc) => {
+      const m = doc.data();
+      const time = m.createdAt?.toDate ? formatTime(m.createdAt.toDate()) : "";
+
+      messages.innerHTML += `
+        <div class="chat-message">
+          <div class="chat-message-top">
+            <strong>${m.pseudo}</strong>
+            <span>${time}</span>
+          </div>
+          <p>${m.message}</p>
+        </div>
+      `;
+    });
+
+    messages.scrollTop = messages.scrollHeight;
+  });
 }
 
-/* HEADER */
-const userPseudo = document.getElementById("userPseudo");
-if (userPseudo) userPseudo.innerText = getPseudo();
+/* ======================
+   PROFIL
+====================== */
+
+const profileName = document.getElementById("profileName");
+const profileAvatar = document.getElementById("profileAvatar");
+const profileBadge = document.getElementById("profileBadge");
+const tradeCount = document.getElementById("tradeCount");
+const messageCount = document.getElementById("messageCount");
+
+if (profileName && profileAvatar && profileBadge) {
+  const pseudo = getPseudo();
+
+  profileName.innerText = pseudo;
+  profileAvatar.src = `https://robohash.org/${pseudo}.png?set=set4`;
+
+  if (pseudo.toLowerCase() === "alan224402") {
+    profileBadge.innerText = "👑 Fondateur";
+    profileBadge.classList.add("founder-badge");
+  } else if (pseudo === "Invité") {
+    profileBadge.innerText = "Invité";
+  } else {
+    profileBadge.innerText = "🌌 Membre Nexus";
+  }
+
+  onSnapshot(collection(db, "trades"), (snapshot) => {
+    let count = 0;
+
+    snapshot.forEach((doc) => {
+      if (doc.data().pseudo === pseudo) count++;
+    });
+
+    tradeCount.innerText = count;
+  });
+
+  onSnapshot(collection(db, "messages"), (snapshot) => {
+    let count = 0;
+
+    snapshot.forEach((doc) => {
+      if (doc.data().pseudo === pseudo) count++;
+    });
+
+    messageCount.innerText = count;
+  });
+}
