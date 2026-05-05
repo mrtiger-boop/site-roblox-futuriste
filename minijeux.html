@@ -29,54 +29,51 @@
 
 <section class="games-hero">
   <span class="mini-badge">🎮 Zone détente</span>
-  <h2>Mini-jeux Galactiques</h2>
-  <p>Joue pendant que tu attends des trades et tente de battre tes scores.</p>
+  <h2>20 Mini-jeux Galactiques</h2>
+  <p>Joue pendant que tu attends des trades.</p>
 </section>
 
 <section class="games-grid">
 
-  <div class="game-card big-glow">
-    <h3>🎲 Dé spatial</h3>
-    <p>Lance le dé et tente le 6 parfait.</p>
-    <button onclick="rollDice()">Lancer</button>
-    <strong id="diceResult">?</strong>
-  </div>
+  <div class="game-card"><h3>🎲 Dé spatial</h3><p>Lance un dé galactique.</p><button onclick="rollDice()">Lancer</button><strong id="diceResult">?</strong></div>
 
-  <div class="game-card">
-    <h3>🪙 Pile ou face</h3>
-    <p>Choisis ton destin Nexus.</p>
-    <button onclick="coinFlip()">Lancer</button>
-    <strong id="coinResult">?</strong>
-  </div>
+  <div class="game-card"><h3>🪙 Pile ou face</h3><p>Choisis ton destin.</p><button onclick="coinFlip()">Lancer</button><strong id="coinResult">?</strong></div>
 
-  <div class="game-card big-glow">
-    <h3>🎰 Roulette Nexus</h3>
-    <p>La roulette peut te donner une récompense rare.</p>
-    <button onclick="roulette()">Tourner</button>
-    <strong id="rouletteResult">?</strong>
-  </div>
+  <div class="game-card"><h3>🎰 Roulette Nexus</h3><p>Tente ta chance.</p><button onclick="roulette()">Tourner</button><strong id="rouletteResult">?</strong></div>
 
-  <div class="game-card">
-    <h3>⚡ Réflexe Flash</h3>
-    <p>Clique quand le bouton devient vert.</p>
-    <button id="reflexBtn" onclick="startReflex()">Démarrer</button>
-    <strong id="reflexResult">Prêt ?</strong>
-  </div>
+  <div class="game-card"><h3>⚡ Réflexe Flash</h3><p>Clique quand c’est vert.</p><button id="reflexBtn" onclick="startReflex()">Démarrer</button><strong id="reflexResult">Prêt ?</strong></div>
 
-  <div class="game-card">
-    <h3>🔢 Nombre mystère</h3>
-    <p>Trouve le nombre entre 1 et 10.</p>
-    <input id="guessInput" type="number" min="1" max="10" placeholder="Ton nombre">
-    <button onclick="guessNumber()">Tester</button>
-    <strong id="guessResult">?</strong>
-  </div>
+  <div class="game-card"><h3>🔢 Nombre mystère</h3><p>Trouve entre 1 et 10.</p><input id="guessInput" type="number" min="1" max="10" placeholder="Nombre"><button onclick="guessNumber()">Tester</button><strong id="guessResult">?</strong></div>
 
-  <div class="game-card big-glow">
-    <h3>🌌 Cristal Nexus</h3>
-    <p>Ouvre un cristal et découvre ta rareté.</p>
-    <button onclick="openCrystal()">Ouvrir</button>
-    <strong id="crystalResult">💎</strong>
-  </div>
+  <div class="game-card"><h3>🌌 Cristal Nexus</h3><p>Ouvre un cristal rare.</p><button onclick="openCrystal()">Ouvrir</button><strong id="crystalResult">💎</strong></div>
+
+  <div class="game-card"><h3>🎯 Cible cosmique</h3><p>Tente de toucher le centre.</p><button onclick="cosmicTarget()">Tirer</button><strong id="targetResult">?</strong></div>
+
+  <div class="game-card"><h3>🧠 Memory Code</h3><p>Retrouve le code secret.</p><button onclick="memoryCode()">Code</button><strong id="memoryResult">?</strong></div>
+
+  <div class="game-card"><h3>🪐 Planète chance</h3><p>Découvre ta planète.</p><button onclick="planetLuck()">Explorer</button><strong id="planetResult">?</strong></div>
+
+  <div class="game-card"><h3>💣 Bombe chrono</h3><p>Désamorce la bombe.</p><button onclick="bombGame()">Désamorcer</button><strong id="bombResult">?</strong></div>
+
+  <div class="game-card"><h3>🧩 Mot mystère</h3><p>Un mot Roblox caché.</p><button onclick="mysteryWord()">Révéler</button><strong id="wordResult">?</strong></div>
+
+  <div class="game-card"><h3>🚀 Boost Rocket</h3><p>Décollage aléatoire.</p><button onclick="rocketBoost()">Décoller</button><strong id="rocketResult">?</strong></div>
+
+  <div class="game-card"><h3>🕳️ Trou noir</h3><p>Survis à l’attraction.</p><button onclick="blackHole()">Entrer</button><strong id="blackHoleResult">?</strong></div>
+
+  <div class="game-card"><h3>💎 Coffre galactique</h3><p>Ouvre un coffre mystère.</p><button onclick="galaxyChest()">Ouvrir</button><strong id="chestResult">?</strong></div>
+
+  <div class="game-card"><h3>🧪 Potion random</h3><p>Bois une potion étrange.</p><button onclick="randomPotion()">Boire</button><strong id="potionResult">?</strong></div>
+
+  <div class="game-card"><h3>👾 Alien Clicker</h3><p>Clique pour capturer l’alien.</p><button onclick="alienClicker()">Cliquer</button><strong id="alienResult">0</strong></div>
+
+  <div class="game-card"><h3>🛰️ Satellite Scan</h3><p>Scanne l’espace.</p><button onclick="satelliteScan()">Scanner</button><strong id="scanResult">?</strong></div>
+
+  <div class="game-card"><h3>🔮 Oracle Nexus</h3><p>Reçois une prédiction.</p><button onclick="oracleNexus()">Prédire</button><strong id="oracleResult">?</strong></div>
+
+  <div class="game-card"><h3>🐉 Boss Chance</h3><p>Affronte le boss.</p><button onclick="bossChance()">Attaquer</button><strong id="bossResult">?</strong></div>
+
+  <div class="game-card"><h3>🌠 Étoile filante</h3><p>Fais un vœu.</p><button onclick="shootingStar()">Vœu</button><strong id="starResult">?</strong></div>
 
 </section>
 
