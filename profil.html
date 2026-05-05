@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Profil</title>
-
+<title>Profil - RbxTrade Nexus</title>
 <link rel="icon" href="./logotn.png">
 <link rel="stylesheet" href="./style.css">
 </head>
@@ -20,29 +19,50 @@
     <a href="index.html">Accueil</a>
     <a href="trades.html">Trades</a>
     <a href="discussion.html">Discussion</a>
+    <a href="connexion.html">Connexion</a>
   </nav>
 
   <span id="userPseudo"></span>
 </header>
 
-<section class="profile-page">
+<section class="profile-plus-page">
 
-<div class="profile-card">
-  <img id="profileAvatar" class="profile-avatar">
-  <h2 id="profileName"></h2>
-  <p id="profileBadge"></p>
+  <div class="profile-plus-card">
+    <div class="profile-banner"></div>
 
-  <div class="profile-stats">
-    <div>
-      <strong id="tradeCount">0</strong>
-      <span>Trades</span>
-    </div>
-    <div>
-      <strong id="messageCount">0</strong>
-      <span>Messages</span>
+    <div class="profile-content">
+      <img id="profileAvatar" class="profile-plus-avatar">
+
+      <h2 id="profileName">Invité</h2>
+      <p id="profileBadge" class="profile-badge">Membre</p>
+
+      <div class="profile-level">
+        <div class="level-top">
+          <span>🌌 Niveau Nexus</span>
+          <strong id="profileLevel">1</strong>
+        </div>
+        <div class="xp-bar">
+          <div id="xpFill" class="xp-fill"></div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div>
+          <strong id="tradeCount">0</strong>
+          <span>Trades</span>
+        </div>
+        <div>
+          <strong id="messageCount">0</strong>
+          <span>Messages</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <a class="btn" href="trades.html">💱 Mes trades</a>
+        <a class="btn secondary" href="discussion.html">💬 Chat</a>
+      </div>
     </div>
   </div>
-</div>
 
 </section>
 
