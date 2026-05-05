@@ -4,23 +4,21 @@
 <meta charset="UTF-8">
 <title>Trades</title>
 
-<link rel="icon" href="logotn.png">
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="./logotn.png">
+<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
 <header>
   <div class="site-logo">
-    <img src="logotn.png">
+    <img src="./logotn.png">
     <h1>Trades</h1>
   </div>
 
   <nav>
     <a href="index.html">Accueil</a>
-    <a href="trades.html">Trades</a>
     <a href="discussion.html">Discussion</a>
-    <a href="connexion.html">Connexion</a>
   </nav>
 
   <span id="userPseudo"></span>
@@ -29,29 +27,19 @@
 <section class="trade-layout">
 
 <div class="glass-panel">
-  <h2>Créer un trade</h2>
-
-  <input id="jeu" placeholder="Jeu Roblox">
+  <input id="jeu" placeholder="Jeu">
   <input id="donne" placeholder="Je donne">
   <input id="cherche" placeholder="Je cherche">
-
-  <select id="rarete">
-    <option>Commun</option>
-    <option>Rare</option>
-    <option>Épique</option>
-    <option>Légendaire</option>
-  </select>
 
   <button onclick="ajouterTrade()">Publier</button>
 </div>
 
 <div class="glass-panel">
-  <h2>Trades</h2>
   <div id="listeTrades"></div>
 </div>
 
 </section>
 
-<script type="module" src="script.js"></script>
+<script type="module" src="./script.js"></script>
 </body>
 </html>
