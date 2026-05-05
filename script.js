@@ -25,6 +25,14 @@ function getPseudo() {
   return localStorage.getItem("pseudo") || "Invité";
 }
 
+function formatTime(date) {
+  if (!date) return "";
+  return date.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 window.ajouterTrade = async function () {
   const pseudo = getPseudo();
   const jeu = document.getElementById("jeu")?.value.trim();
@@ -37,24 +45,18 @@ window.ajouterTrade = async function () {
     return;
   }
 
-  try {
-    await addDoc(collection(db, "trades"), {
-      pseudo,
-      jeu,
-      donne,
-      cherche,
-      rarete,
-      createdAt: serverTimestamp()
-    });
+  await addDoc(collection(db, "trades"), {
+    pseudo,
+    jeu,
+    donne,
+    cherche,
+    rarete,
+    createdAt: serverTimestamp()
+  });
 
-    alert("Trade publié !");
-    document.getElementById("jeu").value = "";
-    document.getElementById("donne").value = "";
-    document.getElementById("cherche").value = "";
-  } catch (error) {
-    alert("Erreur Firebase : " + error.message);
-    console.error(error);
-  }
+  document.getElementById("jeu").value = "";
+  document.getElementById("donne").value = "";
+  document.getElementById("cherche").value = "";
 };
 
 window.envoyerMessage = async function () {
@@ -66,18 +68,13 @@ window.envoyerMessage = async function () {
     return;
   }
 
-  try {
-    await addDoc(collection(db, "messages"), {
-      pseudo,
-      message,
-      createdAt: serverTimestamp()
-    });
+  await addDoc(collection(db, "messages"), {
+    pseudo,
+    message,
+    createdAt: serverTimestamp()
+  });
 
-    document.getElementById("messageChat").value = "";
-  } catch (error) {
-    alert("Erreur Firebase : " + error.message);
-    console.error(error);
-  }
+  document.getElementById("messageChat").value = "";
 };
 
 const listeTrades = document.getElementById("listeTrades");
@@ -106,9 +103,6 @@ if (listeTrades) {
         </div>
       `;
     });
-  }, (error) => {
-    console.error(error);
-    listeTrades.innerHTML = `<p class="empty">Erreur Firebase : ${error.message}</p>`;
   });
 }
 
@@ -132,23 +126,63 @@ if (messages) {
 
     snapshot.forEach((doc) => {
       const m = doc.data();
+      const time = m.createdAt?.toDate ? formatTime(m.createdAt.toDate()) : "";
 
       messages.innerHTML += `
         <div class="chat-message">
-          <strong>${m.pseudo}</strong>
+          <div class="chat-message-top">
+            <strong>${m.pseudo}</strong>
+            <span>${time}</span>
+          </div>
           <p>${m.message}</p>
         </div>
       `;
     });
 
     messages.scrollTop = messages.scrollHeight;
-  }, (error) => {
-    console.error(error);
-    messages.innerHTML = `<p class="empty">Erreur Firebase : ${error.message}</p>`;
   });
 }
 
 const userPseudo = document.getElementById("userPseudo");
 if (userPseudo) {
   userPseudo.innerText = "👤 " + getPseudo();
+}
+
+/* PROFIL */
+const profileName = document.getElementById("profileName");
+const profileAvatar = document.getElementById("profileAvatar");
+const profileBadge = document.getElementById("profileBadge");
+const tradeCount = document.getElementById("tradeCount");
+const messageCount = document.getElementById("messageCount");
+
+if (profileName && profileAvatar && profileBadge) {
+  const pseudo = getPseudo();
+
+  profileName.innerText = pseudo;
+  profileAvatar.src = `https://robohash.org/${pseudo}.png?set=set4`;
+
+  if (pseudo.toLowerCase() === "alan224402") {
+    profileBadge.innerText = "👑 Fondateur";
+    profileBadge.classList.add("founder-badge");
+  } else if (pseudo === "Invité") {
+    profileBadge.innerText = "Invité";
+  } else {
+    profileBadge.innerText = "🌌 Membre Nexus";
+  }
+
+  onSnapshot(collection(db, "trades"), (snapshot) => {
+    let count = 0;
+    snapshot.forEach((doc) => {
+      if (doc.data().pseudo === pseudo) count++;
+    });
+    tradeCount.innerText = count;
+  });
+
+  onSnapshot(collection(db, "messages"), (snapshot) => {
+    let count = 0;
+    snapshot.forEach((doc) => {
+      if (doc.data().pseudo === pseudo) count++;
+    });
+    messageCount.innerText = count;
+  });
 }
