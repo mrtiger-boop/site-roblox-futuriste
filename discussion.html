@@ -2,24 +2,23 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Discussion</title>
+<title>Chat</title>
 
-<link rel="icon" href="logotn.png">
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="./logotn.png">
+<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
 <header>
   <div class="site-logo">
-    <img src="logotn.png">
-    <h1>Discussion</h1>
+    <img src="./logotn.png">
+    <h1>Chat</h1>
   </div>
 
   <nav>
     <a href="index.html">Accueil</a>
     <a href="trades.html">Trades</a>
-    <a href="discussion.html">Discussion</a>
   </nav>
 
   <span id="userPseudo"></span>
@@ -27,19 +26,17 @@
 
 <section class="chat-layout">
 
-<div class="glass-panel chat-box">
+<div class="glass-panel">
 
 <div id="messages"></div>
 
-<div class="chat-inputs">
-  <input id="messageChat" placeholder="Message...">
-  <button onclick="envoyerMessage()">Envoyer</button>
-</div>
+<input id="messageChat">
+<button onclick="envoyerMessage()">Envoyer</button>
 
 </div>
 
 </section>
 
-<script type="module" src="script.js"></script>
+<script type="module" src="./script.js"></script>
 </body>
 </html>
