@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Roblox Futur Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>⚡ Roblox Futur Chat</h1>
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#discussion">Discussion</a>
+    <a href="#regles">Règles</a>
+  </nav>
+</header>
+
+<section class="hero" id="accueil">
+  <h2>Bienvenue dans le futur Roblox</h2>
+  <p>Un espace futuriste pour discuter, partager tes jeux et rencontrer des joueurs.</p>
+  <a href="#discussion" class="btn">Entrer dans le chat</a>
+</section>
+
+<section class="cards">
+  <div class="card">
+    <h3>🎮 Gaming</h3>
+    <p>Parle de tes jeux Roblox préférés.</p>
+  </div>
+
+  <div class="card">
+    <h3>🚀 Créateurs</h3>
+    <p>Montre tes créations Roblox Studio.</p>
+  </div>
+
+  <div class="card">
+    <h3>💬 Communauté</h3>
+    <p>Discute avec d’autres joueurs.</p>
+  </div>
+</section>
+
+<section class="chat" id="discussion">
+  <h2>💬 Discussion</h2>
+
+  <input id="pseudo" placeholder="Ton pseudo Roblox">
+  <textarea id="message" placeholder="Écris ton message..."></textarea>
+  <button onclick="envoyerMessage()">Envoyer</button>
+
+  <div id="messages"></div>
+</section>
+
+<section class="rules" id="regles">
+  <h2>📜 Règles</h2>
+  <p>✅ Respect obligatoire</p>
+  <p>✅ Pas d’insultes</p>
+  <p>✅ Pas de spam</p>
+  <p>✅ Pas de liens dangereux</p>
+</section>
+
+<footer>
+  Site Roblox non officiel © 2026
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
